@@ -3,7 +3,6 @@ package ly.eagle.messaging.service
 import ly.eagle.messaging.dao.CassandraDao
 import ly.eagle.messaging.representations.Message
 import org.springframework.stereotype.Component
-import java.util.*
 
 @Component
 class MessageService(
@@ -13,11 +12,7 @@ class MessageService(
         cassandraDao.save(message)
     }
 
-    fun getMessagesSentToUser(userId: Long): List<Message> {
-        TODO()
-    }
-
-    fun findOneBySenderId(userId: Long): Message {
-        return cassandraDao.findOneOrNoneBySenderId(userId)
+    fun getMessagesSentFromTo(userId1: Long, userId2: Long): List<Message> {
+        return cassandraDao.findAllByMessageKeySenderIdAndMessageKeyRecipientId(userId1, userId2)
     }
 }
