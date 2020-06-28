@@ -15,4 +15,10 @@ class MessageService(
     fun getMessagesSentFromTo(userId1: Long, userId2: Long): List<Message> {
         return cassandraDao.findAllByMessageKeySenderIdAndMessageKeyRecipientId(userId1, userId2)
     }
+
+    fun getAllMessagesBetween(userId1: Long, userId2: Long): List<Message> {
+        return (getMessagesSentFromTo(userId1, userId2) + getMessagesSentFromTo(userId2, userId1)).sortedBy {
+            it.messageKey.timestamp
+        }
+    }
 }

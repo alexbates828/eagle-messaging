@@ -23,8 +23,8 @@ class MessageController(
     }
 
     @GetMapping("/{userId1}/{userId2}")
-    fun getMessagesBetween(@PathVariable userId1: Long, @PathVariable userId2: Long): List<Message> {
-        return messageService.getMessagesSentFromTo(userId1, userId2)
+    fun getAllMessagesBetween(@PathVariable userId1: Long, @PathVariable userId2: Long): List<Message> {
+        return messageService.getAllMessagesBetween(userId1, userId2)
     }
 
 }
